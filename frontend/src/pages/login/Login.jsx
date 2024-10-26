@@ -11,6 +11,7 @@ const Login = () => {
             tenetur ullam, consequatur
           </p>
           <span>Don't you have an account?</span>
+          <button>Register</button>
         </div>
 
         <div className="right">
