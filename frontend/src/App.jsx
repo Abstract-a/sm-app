@@ -5,14 +5,17 @@ import Home from './pages/home/Home.jsx';
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
+  // Route,
   Outlet,
+  Navigate,
 } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar.jsx';
 import LeftBar from './components/leftBar/LeftBar.jsx';
 import RightBar from './components/rightBar/RightBar.jsx';
 
 function App() {
+  const currentUser = true;
+
   const Layout = () => {
     return (
       <div>
@@ -26,10 +29,21 @@ function App() {
     );
   };
 
+  const ProtectedRoute = ({ children }) => {
+    if (!currentUser) {
+      return <Navigate to="/login" />;
+    }
+    return children;
+  };
+
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Layout />,
+      element: (
+        <ProtectedRoute>
+          <Layout />
+        </ProtectedRoute>
+      ),
       children: [
         {
           path: '/',
